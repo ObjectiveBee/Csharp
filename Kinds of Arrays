@@ -1,0 +1,25 @@
+// Многомерные массивы (Multidimensional arrays)
+// Объявление
+type[,....,] arrayName = new type[size1, size2, ...., sizeN];
+
+// Example
+int[,] x = new int[3, 4]; // 1
+int[,] multiarray = {{2, 3}, {4, 5}, {7, 68}}; // 2
+
+/*********************************************************************************/
+
+// Ступенчатые массивы (Jagged arrays)
+// Является массивом, чьими элементами являются массивы.
+// Объявление
+int[][] jaggedArr = new int[3][]; // 1
+int[][] jaggedArr = new int[][] // 2
+{
+  new int[] {1, 2, 3, 4, 5},
+  new int[] {2, 4, 6},
+  new int[] {33, 42}
+};
+
+// Доступ к элементам отдельного массива
+int x = jaggedArr[2][1] // x = 42 (it's second element of the third array)
+
+// Каждый массив может иметь различную длину
