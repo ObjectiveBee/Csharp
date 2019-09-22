@@ -1,0 +1,35 @@
+// Перегрузка операторов //
+// Перегруженными операторами являются методы со специальными именами, 
+// где за ключевым словом operator следует символ переопределяемого оператора
+// Перегруженный оператор имеет возвращаемый тип и список параметров
+
+// Перегруженный оператор должен быть статическим
+// Пример (переопределение '+' для класса Box)
+class Box
+{
+	public int Height { get; set; }
+	public int Width { get; set; }
+	public Box(int h, int w)
+	{
+		Height = h;
+		Width = w;
+	}
+	public static Box operator+(Box a, Box b)
+	{
+		int h = a.Height + b.Height;
+		int w = a.Width + b.Width;
+		Box res = new Box(h, w);
+		return res;
+	}
+}
+static void Main(string[] args)
+{
+	Box b1 = new Box(14, 3);
+	Box b2 = new Box(5, 7);
+	Box b3 = b1 + b2;
+	
+	Console.WriteLine(b3.Height); // 19
+	Console.WriteLine(b3.Width); // 10
+}
+// Все арифметические операторы и оп. сравнения могут быть перегружены.
+// При перегрузке оператора "больше чем", оператор "меньше чем" должен быть также переопределён.
