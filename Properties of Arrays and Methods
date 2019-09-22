@@ -24,4 +24,15 @@ Remove(index) // удаляет все символы в строке после
 Replace(oldValue, newValue) // заменяет указанное значение в строке
 Substring(index, length) // возвращает подстроку указанной длины, начиная с указанного индекса.
                          // если длина не указана, то операция продолжается до конца строки.
-Contains(value) // возвращает true (
+Contains(value) // возвращает true, если строка содержит указанное значение
+
+// Examples:
+string a = "some text";
+Console.WriteLine(a.IndexOf('t')) // Outputs 5
+a = a.Insert(0, "This is "); // Outputs "This is some text"
+a = a.Replace("This is", "I am"); // Outputs "I am some text"
+a = a.Remove(4); // Outputs "I am"
+a = a.Substring(2); // Outputs "am"
+
+string a = "some text";
+Console.WriteLine(a[2]); // Outputs "m"
