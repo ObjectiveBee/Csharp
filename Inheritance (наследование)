@@ -1,0 +1,118 @@
+// Наследование
+// позволяет определить класс, основанный на другом классе
+// Base класс - чьи свойства наследуются
+// Derived класс - наследующий свойства
+class Animal
+{
+	public int Legs { get; set; }
+	public int Age { get; set; }
+}
+class Dog : Animal
+{
+	public Dog()
+	{
+		Legs = 4;
+	}
+	public void Bark()
+	{
+		Console.Write("Woof");
+	}
+}
+static void Main(string[] args)
+{
+	Dog d = new Dog();
+	Console.WriteLine(d.Legs);
+	
+	d.Bark();
+}
+// Производный класс наследует все члены базового класса, включая его методы
+class Person
+{
+	public void Speak()
+	{
+		Console.WriteLine("Hi there");
+	}
+}
+class Student : Person
+{
+	int number;
+}
+static void Main(string[] args)
+{
+	Student s = new Student();
+	s.Speak();
+}
+
+// С# не поддерживает множественное наследование
+// Однако можно использовать интерфейсы, чтобы реализовывать множественное наследование
+
+/*******************************************************************************************/
+// Защищённые члены // protected
+// Доступ к члену может быть получен в производных классах
+class Person
+{
+	protected int Age { get; set; }
+	protected string Name { get; set; }
+}
+class Student : Person
+{
+	public Student(string nm)
+	{
+		Name = nm;
+	}
+	public void Speak()
+	{
+		Console.Write("Name: " + Name);
+	}
+}
+static void Main(string[] args)
+{
+	Student s = new Student("David");
+	s.Speak(); // Outputs "Name: David"
+	s.Name = "Bob"; //  Error
+}
+
+/**************************************************************************************/
+// Защита от наследования // sealed
+sealed class Animal
+{
+	// some code
+}
+class Dog : Animal {} // error
+
+/************************************************************************************************************************/
+// Конструктор и деструктор производного класса //
+// При наследовании, конструктор и диструктор базового класса не наследуются
+// Конструктор и деструктор базового класса вызываются автоматически,
+// когда объект производного класса создаётся, или удаляется
+class Animal
+{
+	public Animal()
+	{
+		Console.WriteLine("Animal created");
+	}
+	~Animal()
+	{
+		Console.WriteLine("Animal deleted");
+	}
+}
+class Dog : Animal
+{
+	public Dog()
+	{
+		Console.WriteLine("Dog created");
+	}
+	~Dog()
+	{
+		Console.WriteLine("Dog deleted");
+	}
+}
+static void Main(string[] args)
+{
+	Dog d = new Dog();
+}
+// Outputs //
+// Animal created
+// Dog created
+// Dog deleted
+// Animal deleted
