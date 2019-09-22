@@ -1,0 +1,109 @@
+// Свойства //
+// Свойства является элементом, предоставляющим гибкий механизм чтения, записи или вычисления значения приватного поля.
+class Person
+{
+	private string name;
+	
+	public string Name // property
+	{
+		get { return name; }
+		set { name = value; }
+	}
+}
+static void Main(string[] args)
+{
+	Person p = new Person();
+	p.Name = "Bob";
+	Console.WriteLine(p.Name);
+}
+// Value является специальным ключ-ым словом, предоставляющим значение, которое мы присвоили свойству, используя элемент set.
+// Принято, что свойства должны иметь имена идентичные полю, с заглавной буквы.
+
+// Пример свойства доступное только для чтения
+class Person
+{
+	private string name;
+	public string Name
+	{
+		get { return name; }
+	}
+}
+
+// Присваивание с проверкой (свойство)
+class Person
+{
+	private int age = 0;
+	public int Age
+	{
+		get { return age; }
+		set
+		{
+			if (value > 0)
+				age = value;
+		}
+	}
+}
+
+// Автоматические реализуемые свойства
+class Person
+{
+	public string Name { get; set; }
+}
+static void Main(string[] args)
+{
+	Person p = new Personn();
+	p.Name = "Bob";
+	Console.WriteLine(p.Name);
+}
+
+/**************************************************************************************************/
+
+// Статические элементы //
+// Члены класса м. б. также объявлены с использованием static.
+// Таким обрвзом эти элементы становятся принадлежать самому классу, а не отдельным объектам.
+// Существует только одна копия статического члена.
+class Cat
+{
+	public static int count = 0;
+	public Cat()
+	{
+		count++;
+	}
+}
+// Не важно, сколько создано объектов класса Cat, всегда будет только одна переменная count, которая принадлежит классу Cat.
+
+// Доступ к статическим членам м. б. получен напрямую, с помощью имени класса без объекта.
+class Cat
+{
+	public static int count = 0;
+	public Cat()
+	{
+		count++;
+	}
+}
+static void Main(string[] args)
+{
+	Cat c1 = new Cat();
+	Cat c2 = new Cat();
+	
+	Console.WriteLine(Cat.count); // Outputs 2
+}
+// Переменная count разделена между всеми объектами класса Cat
+// Константные члены являются статическими по определению
+
+/***********************************************************************************************/
+
+// Статические конструкторы //
+class SomeClass
+{
+	public static int X { get; set; }
+	public static int Y { get; set; }
+	
+	static SomeClass()
+	{
+		X = 10;
+		Y = 20;
+	}
+}
+// Конструктор будет вызван один раз, когда мы попытамся получить доступ к SomeClass.X или SomeClass.Y.
+// "Статический конструктор" служит для инициализации статических членов класса.
