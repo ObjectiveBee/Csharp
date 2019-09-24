@@ -1,4 +1,4 @@
-// Многомерные массивы (Multidimensional arrays)
+// Многомерные массивы (Multidimensional arrays) // 
 // Объявление
 type[,....,] arrayName = new type[size1, size2, ...., sizeN];
 
