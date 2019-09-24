@@ -1,0 +1,39 @@
+// Полиморфизм //
+// означает, что один метод имеет несколько реализаций
+class Shape
+{
+	public virtual void Draw()
+	{
+		Console.WriteLine("BaseDraw");
+	}
+}
+// Ключевое слово virtual позволяет переписывать методы в производных классах
+class Circle : Shape
+{
+	public override void Draw()
+	{
+		// draw a circle...
+		Console.WriteLine("Circle Draw");
+	}
+}
+class Rectangular : Shape
+{
+	public override Draw()
+	{
+		// draw a rectangular...
+		Console.WriteLine("Rectangular Draw");
+	}
+}
+// Виртуальный метод Draw() в базовом классе может быть переписан в производных классах
+static void Main(string[] args)
+{
+	Shape c = new Circle();
+	c.Draw();
+	// Outputs "Circle Draw"
+	
+	Shape r = new Rectangular();
+	r.Draw();
+	// Outputs "Rectangular Draw"
+}
+// Подход полиморфизма позволяет нам обращаться с каждым объектом одинаковым образом.
+// Так как все объекты имеют тип Shape, то ими легче управлять и с ними легче работать.
