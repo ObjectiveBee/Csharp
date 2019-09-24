@@ -1,4 +1,4 @@
-// Объявление массивов
+// Объявление массивов #Array
 int[] myArray = new int[6]; // 1
 int[] myArray = new int[6] {1, 2, 3, 4, 5, 6}; // 2
 int[] myArray = new int[] {1, 2, 3, 4, 5, 6}; // 3
