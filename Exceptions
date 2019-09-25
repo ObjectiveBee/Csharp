@@ -1,0 +1,83 @@
+// Исключения //
+// это проблема, которая возникает во время выполнения программы
+// Причины возникновения:
+- пользователь ввел неподходящие данные
+- файл, который должен быть открыт, не найден
+- Сетевое соединение потеряно в середине коммутации
+- недостаток памяти, и другие причины, связанные с физическими ресурсами
+
+// try-catch
+try
+{
+	int[] arr = new int[] {4, 5, 8};
+	Console.WriteLine(arr[8]);
+}
+catch(Exception e)
+{
+	Console.WriteLine("An error occurred");
+}
+// Outputs "An error occured" 
+
+// Код, который может сгенерировать исключение, размещается в блоке try.
+// Если возникает исключение, то выполняется блок catch без остановки программы
+// Exception - общий тип для обработки всех исключений
+// Также можно использовать объект исключений e для доступа к деталям исключений, типа оригинального сообщения об ошибке
+(e.Message)
+try
+{
+	int[] arr = new int[] {4, 5, 8};
+	Console.WriteLine(arr[8]);
+}
+catch(Exception e)
+{
+	Console.WriteLine(e.Message);
+}
+// Outputs "Index was outside the bounds of the array"
+
+/********************************************************************************************************/
+// Обработка множества исключений //
+int x, y;
+try
+{
+	x = Convert.ToInt32(Console.Read());
+	y = Convert.ToInt32(Console.Read());
+	Console.WriteLine(x / y);
+}
+catch(DivideByZeroException e)
+{
+	Console.WriteLine("Cannot divide by 0");
+}
+catch(Exception e)
+{
+	Console.WriteLine("An error occured");
+}
+
+// наиболее часто используемые типы исключений
+- FileNotFoundException
+- FormatException
+- IndexOutOfRangeException
+- InvalidOperationException
+- OutOfMemoryException
+
+/******************************************************************************************/
+// finally //
+// опционально используется после блоков catch
+// в любом случае выполняет набор выражений
+int result = 0;
+int num1 = 8;
+int num2 = 4;
+try
+{
+	result = num1 / num2;
+}
+catch (DivideByZeroException e)
+{
+	Console.WriteLine("Error");
+}
+finally
+{
+	Console.WriteLine(result);
+}
+
+// Блок finally может использовать, к примеру, при работе с файлами, или другими ресурсами.
+// Они должны быть закрыты, или освобождены, в блоке finally, независимо от того, было вызвано исключение, или нет.
