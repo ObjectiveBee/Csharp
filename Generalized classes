@@ -1,0 +1,40 @@
+// Обобщённые классы //
+// Наиболее частым использованием обощённых классов является использование с коллекциями элементов,
+// где операции добавления и удаления элементов из коллекции выполняются одинаковым способом,
+// независимо от хранимого типа данных
+
+// Один тип коллекции называется стеком
+
+class Stack<T>
+{
+	int index = 0;
+	T[] innerArray = new T[100];
+	public void Push(T item)
+	{
+		innerArray[index++] = item;
+	}
+	public T Pop()
+	{
+		return innerArray[--index];
+	}
+	public T Get(int k)
+	{
+		return innerArray[k];
+	}
+}
+// Теперь мы можем создавать объекты обобщённого класса:
+Stack<int> intStack = new Stack<int>();
+Stack<string> strStack = new Stack<string>();
+Stack<Person> PersonStack = new Stack<Person>();
+
+// В обобщённом классе не нужно определять обобщённый тип для его методов,
+// потому что обобщённый тип определяется на уровне класса
+
+// Методы обобщённого класса вызываются также, как и в других объектах:
+Stack<int> intStack = new Stack<int>();
+intStack.Push(3);
+intStack.Push(6);
+intStack.Push(7);
+
+Console.WriteLine(intStack.Get(1));
+// Outputs 6
