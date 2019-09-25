@@ -1,0 +1,38 @@
+// Обощенные методы //
+// позволяют повторно использовать код между различными типами
+stactic void Swap(ref int a, ref int b)
+{
+	int temp = a;
+	a = b;
+	b = temp;
+}
+// Работает только с целочисленными параметрами
+
+//для всех типов
+static void Swap<T>(ref T a, ref T b)
+{
+	T temp = a;
+	a = b;
+	b = temp;
+}
+
+// Итог
+static void Swap<T>(ref T a, ref T b)
+{
+	T temp = a;
+	a = b;
+	b = temp;
+}
+static void Main(string[] args)
+{
+	int a = 4, b = 9;
+	Swap<int>(ref a, ref b);
+	
+	string x = "Hello";
+	string y = "World";
+	Swap<string>(ref x, ref y);
+}
+// При вызове обощенного метода, нам необходимо указать с каким типов он будет работать, используя скобки
+
+// Множество обобщенных параметров может быть использовано в одном методе.
+// например, Func<T, U> принимает два различных обощённых типа
