@@ -1,0 +1,43 @@
+// Перечисления //
+// используется ключевое слово enum
+// По умолчанию, первый перечислитель имеет значение 0,
+// а значение каждого успешного перечислителя увеличивается на 1.
+enum Days {Sun, Mon, Tue, Wed, Thu, Fri, Sat}; // 0 1 2 3 4 5 6
+
+// также можно присовить собственные значения
+enum Days {Sun, Mon, Tue, Wed = 4, Thu, Fri, Sat}; // 0 1 2 4 5 6 7
+
+// можно ссылаться на значения в перечислении с помощью синтаксиса с точкой
+// Чтобы присвоить значения перечислений к переменным типа int, необходимо указать тип в скобках
+enum Days { Sun, Mon, Tue, Wed, Thu, Fri, Sat };
+
+static void Main(string[] args)
+{
+	int x = (int)Days.Tue;
+	Console.WriteLine(x);
+	// Outputs 2
+}
+
+// В основном, перечисления определяют переменные, которые представляют собой члены фиксированного набора
+
+// Перечисления часто используются с выражениями switch
+enum TrafficLights { Green, Red, Yellow };
+
+static void Main(string[] args)
+{
+	TrafficLights x = TrafficLights.Red;
+	
+	switch (x)
+	{
+		case TrafficLights.Green:
+			Console.WriteLine("Go!");
+			break;
+		case TrafficLights.Red:
+			Console.WriteLine("Stop!");
+			break;
+		case TrafficLights.Yellow:
+			Console.WriteLine("Caution!");
+			break;
+	}
+	// outputs "Stop!"
+}
