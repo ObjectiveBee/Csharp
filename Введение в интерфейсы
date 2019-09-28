@@ -1,0 +1,237 @@
+// Интерфейсы //
+// это полностью абстрактный класс, содержащий только абстрактные члены
+// объявляется с помощью ключевого слова interface
+public interface IShape
+{
+	void Draw();
+}
+// Все члены интерфейса являются абстрактными по умолчанию
+
+// Все члены интерфейса всегда являются публичными, никакие модификаторы доступа не могут быть к ним применены.
+// Принято использовать заглавную букву I в качестве первой буквы имени интерфейса.
+
+// Интерфейсы могут содержать: свойства, методы, индексаторы и события.
+// НЕ МОГУТ содержать статические члены, переменные, константы
+
+// Интерфейс просто описывает, что должен делать класс.
+// Класс должен реализовывать все методы и свойства применяемых интерфейсов, иначе - ошибка.
+// При реализации членов интерфейса, должен применяться только модификатор доступа - public.
+
+public interface IShape
+{
+	void Draw();
+}
+class Circle : IShape
+{
+	public void Draw()
+	{
+		Console.WriteLine("Circle Draw");
+	}
+}
+static void Main(string[] args)
+{
+	IShape c = new Circle();
+	c.Draw();
+	// Outputs "Circle Draw"
+}
+// ключевое слово override не нужно при реализации интерфейса
+
+// Отличия от абстрактных классов:
+- Класс может наследоваться только от одного базового класса, но может реализовать множество интерфейсов
+class A : IShape, IAnimal, и т.д.
+
+// ****************************************Пример ******************************* //
+using System;
+
+namespace HelloWorld
+{
+	interface IMovable
+	{
+		void Move();
+	}
+	class Person : IMovable
+	{
+		public void Move()
+		{
+			Console.WriteLine("A human is going");
+		}
+	}
+	struct Car : IMovable
+	{
+		public void Move()
+		{
+			Console.WriteLine("A car is driving");
+		}
+	}
+	class Program
+	{
+		static void Action(IMovable movable) // в качестве параметра принимает объект интерфейса
+		{
+			movable.Move();
+		}
+		static void Main(string[] args)
+		{
+			Person person = new Person();
+			Car car = new Car();
+			Action(person);
+			Action(car);
+		}
+	}
+}
+
+/****************************************************************************/
+// Реализация интерфейсов в базовых и производных классах //
+
+// Можно не реализовывать методы интерфейса, сделав их абстрактными, 
+// переложив право их реализации на производные классы
+
+interface IMovable
+{
+	void Move();
+}
+abstract class Person : IMovable
+{
+	public abstract void Move();
+}
+class Drive : Person
+{
+	public override void Move()
+	{
+		Console.WriteLine("Шофёр ведёт машину");
+	}
+}
+
+// при реализации интерфейса учитываются также методы и свойства, унаследованные от базового класса
+
+interface IAction
+{
+	void Move();
+}
+class BaseAction
+{
+	public void Move()
+	{
+		Console.WriteLine("Move in BaseAction");
+	}
+}
+class HeroAction : BaseAction, IAction
+{
+	// класс HeroAction может не реализовывать метод Move,
+	// так как этот метод уже определён в базовом классе BaseAction
+	
+	// Если класс одновременно наследует другой класс и реализует интерфейс,
+	// то название базового класса должно быть указано до реализуемых интерфейсов:
+	// class HeroAction : BaseAction, IAction
+}
+
+/**********************************************************************/
+// Реализация интерфейсов по умолчанию //
+// - то есть в итерфейсах можно определить полноценные методы и свойства, 
+// которые имеют реализацию в обычных классах
+
+class Program
+{
+	static void Main(string[] args)
+	{
+		IMovable tom = new Person();
+		Car tesla new Car();
+		tom.Move(); // Walking
+		tesla.Move(); // Driving
+	}
+}
+interface IMovable
+{
+	void Move()
+	{
+		Console.WriteLine("Walking");
+	}
+}
+class Person : IMovable { }
+class Car : Imovable
+{
+	public void Move()
+	{
+		Console.WriteLine("Driving");
+	}
+}
+
+// интерфейс IMovable определяет реализацию по умолчанию для метода Move.
+// Класс Person не реализует этот метод, поэтому он применяет реализацию по умолчанию
+// в отличии от класса Car
+
+/********************************************************************************************/
+// Множественная реализация интерфейсов //
+
+namespace HelloApp
+{
+	interface IAccount
+	{
+		int CurrentSum { get; } // Текущая сумма на счету
+		void Put (int sum); // Положить деньги на счёт
+		void Withdraw(int sum); // Взять со счёта
+	}
+	interface IClient
+	{
+		string Name { get; set; }
+	}
+	class Client : IAccount, IClient
+	{
+		int _sum; // переменная для хранения суммы
+		public string Name { get; set; }
+		public Client(string name, int sum)
+		{
+			Name = name;
+			_sum = sum;
+		}
+		public int CurrentSum { get { return _sum; } }
+		public void Put(int sum) { _sum += sum; }
+		public void WithDraw(int sum)
+		{
+			if (_sum >= sum)
+			{
+				_sum -= sum;
+			}
+		}
+	}
+	class Program
+	{
+		static void Main(string[] args)
+		{
+			Client client = new Client("Tom", 200);
+			client.Put(30);
+			Console.WriteLine(client.CurrentSum); // 230
+			client.Withdraw(100);
+			Console.WriteLine(client.CurrentSum); // 130
+			
+			Console.ReadKey();
+		}
+	}
+}
+
+// класс Client реализует оба интерфейса и затем применяет в программе
+
+/***************************************************************************/
+// Интерфейсы в преобразованиях типов //
+// Поскольку класс Client реализует интерфейс IAccount, 
+// то переменная типа IAccount может хранить ссылку на объект типа Client
+
+// Все объекты Client являются объектами IAccount
+IAccount account = new Client("Tom", 200);
+account.Put(200);
+Console.WriteLine(account.CurrentSum); // 400
+// Не все объекты IAccount являются объектами Client, необходимо явное приведение
+Client client = (Client)account;
+// Интерфейс IAccount не имеет свойства Name, необходимо явное приведение
+string clientName = ((Client)account).Name;
+
+// Преобразование от класса к его интерфейсу, как и преобразование от производного типа к базовому,
+// выполняется автоматически, так как любой объект Client реализует интерфейс IAccount
+
+/*
+Обратное преобразование 
+- от интерфейса к реализующему его классу будет аналогично преобразованию от базового класса к производному. 
+Так как не каждый объект IAccount является объектом Client (ведь интерфейс IAccount могут реализовать и другие классы),
+то для подобного преобразования необходима операция приведения типов. И если мы хотим обратиться к методам класса Client,
+которые не определены в интерфейсе IAccount, но являются частью класса Client, 
+то нам надо явным образом выполнить преобразование типов: string clientName = ((Client)account).Name;
+*/
