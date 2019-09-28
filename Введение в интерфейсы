@@ -134,7 +134,7 @@ class Program
 	static void Main(string[] args)
 	{
 		IMovable tom = new Person();
-		Car tesla new Car();
+		Car tesla = new Car();
 		tom.Move(); // Walking
 		tesla.Move(); // Driving
 	}
